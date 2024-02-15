@@ -139,9 +139,14 @@ const getMatrixData2D = function (matrixId) {
 // Add your matrix calculation functions here
 // The functions must check the posibility of calculation too.
 function addMatrices(matrix1, matrix2){ 
-	// provide the code
-    if(matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length){
-        return ["Error"];
+    if(!Array.isArray(matrix1) || !Array.isArray(matrix2)){
+        return ["Error: Both inputs must be arrays"];
+    }
+    if(!matrix1.every(row => Array.isArray(row)) || !matrix2.every(row => Array.isArray(row))){
+        return ["Error: Both inputs must be matrices"];
+    }
+    if(matrix1.length !== matrix2.length || matrix1[0].length !== matrix2[0].length){
+        return ["Error: Both matrices must have the same dimensions"];
     }
 
     let result = [];
@@ -150,15 +155,19 @@ function addMatrices(matrix1, matrix2){
         result[i] = [];
         for(let j = 0; j < matrix1[0].length; j++){
             result[i][j] = matrix1[i][j] + matrix2[i][j];
-            console.log(result[i][j]);
         }
     }
     return result;
 }
 const subtractMatrices = function (matrix1, matrix2) { 
-	// provide the code
-    if(matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length){
-        return ["Error"];
+    if(!Array.isArray(matrix1) || !Array.isArray(matrix2)){
+        return ["Error: Both inputs must be arrays"];
+    }
+    if(!matrix1.every(row => Array.isArray(row)) || !matrix2.every(row => Array.isArray(row))){
+        return ["Error: Both inputs must be matrices"];
+    }
+    if(matrix1.length !== matrix2.length || matrix1[0].length !== matrix2[0].length){
+        return ["Error: Both matrices must have the same dimensions"];
     }
 
     let result = [];
@@ -171,20 +180,26 @@ const subtractMatrices = function (matrix1, matrix2) {
     }
     return result;
 };
+
 const multiplyMatrices = (matrix1, matrix2) => { 
-	// provide the code
-    if(matrix1[0].length != matrix2.length){
-        return ["Error"];
+    if(!Array.isArray(matrix1) || !Array.isArray(matrix2)){
+        return ["Error: Both inputs must be arrays"];
+    }
+    if(!matrix1.every(row => Array.isArray(row)) || !matrix2.every(row => Array.isArray(row))){
+        return ["Error: Both inputs must be matrices"];
+    }
+    if(matrix1[0].length !== matrix2.length){
+        return ["Error: The number of columns in the first matrix must be equal to the number of rows in the second matrix"];
     }
 
     let result = [];
 
     for(let i = 0; i < matrix1.length; i++){
         result[i] = [];
-        for(let j = 0; j < matrix1[0].length; j++){
+        for(let j = 0; j < matrix2[0].length; j++){
             result[i][j] = 0;
-            for(let k = 0; k < matrix2.length; k++){
-                result[i][j] = result[i][j] + (matrix1[i][k] * matrix2[k][j]);
+            for(let k = 0; k < matrix1[0].length; k++){
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
             }
         }
     }
