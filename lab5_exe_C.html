@@ -105,7 +105,7 @@ Description : DOM Elements.
 			<section>
 				<h2>About Us</h2>
 				<p>This is a paragraph about our company.</p>
-				<img src="./images/.svg" alt="Company logo" width="100px" />
+				<img src="./images/logo.svg" alt="Company logo" width="100px" />
                 
 				<h3>Our Journey</h3>
 				<p>
@@ -219,30 +219,69 @@ Description : DOM Elements.
 				}
 
 				// Task 3: Hide the section titled 'What is full-stack?'
-				const articles = document.querySelectorAll('article');
-				article.forEach(article => {
-					article.style.display = "none";
-				});
+				var articles = document.getElementsByTagName('article');
+
+				let firstArticle = articles[0];
+				
+				for(let i = 0; i < firstArticle.children.length; i++){
+					firstArticle.children[i].style.display = 'none';
+				}	
 
 				// Task 4: Create a new <p> element and append it to the 'About Us' section
-
+				let container = document.getElementsByClassName("container");
+				let newParagraph = document.createElement("p");
+				let aboutUs = container[0].children[0];
+				newParagraph.textContent = "This is a new paragraph";
+				newParagraph.style.color = "red";
+				aboutUs.appendChild(newParagraph);
 
 				// Task 5: Add placeholders to input elements based on their corresponding label IDs
+				var name = document.getElementById("name");
+				name.placeholder = "Enter your name";
 
+				var email = document.getElementById('email');
+				email.placeholder = "Enter your email";
+
+				var message = document.getElementById("message");
+				message.placeholder = "Enter a message";
 
 				// Task 6: Set the src attribute of the image
-
+				var images = document.getElementsByTagName("img");
+				let logo = images[0];
+				logo.setAttribute("src", "./images/example.svg");
 
 				// Task 7: Add a new item in the navigation menu
+				let bar = navBars[0].children[0];
+				let list = document.createElement('li');
+				let newItem = document.createElement('a');
+				newItem.textContent = "Social Media";
+				newItem.style.color = 'blue';
+				newItem.setAttribute('href','https://www.youtube.com/watch?v=fx2Z5ZD_Rbo')
 
-
+				bar.appendChild(list);
+				list.appendChild(newItem);
+				
 				// Task 8: Change the submit button text upon clicking and make it disabled
+				
+				const inputs = document.getElementsByTagName('input');
+				var submitButton = inputs[2];
 
+				submitButton.addEventListener("click",function(){
+					submitButton.disbaled = true;
+					submitButton.setAttribute("value","Submitted");
+				});
 
 				// Task 9: Change the text color of each item in the 'Related Links' to green
-
+				var relatedLinks = document.getElementsByTagName("aside");
+				var links = relatedLinks[0].getElementsByTagName('a');
+				for(let i =0; i < links.length; i++){
+					links[i].style.color = "green";
+				}
 
 				// Task 10: Add a red solid border to the footer
+				var footers = document.getElementsByTagName('footer');
+				var footer = footers[0];
+				footer.style.border = '2px solid red';
 			});
 		</script>
 	</body>
